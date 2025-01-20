@@ -1,0 +1,612 @@
+{
+	"info": {
+		"_postman_id": "31eb123a-8f2b-42a0-b916-6f6bb0537b22",
+		"name": "MetodosFakeStoreAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20553446",
+		"_collection_link": "https://www.postman.com/solar-shuttle-941862/workspace/fakestore/collection/20553446-31eb123a-8f2b-42a0-b916-6f6bb0537b22?action=share&source=collection_link&creator=20553446"
+	},
+	"item": [
+		{
+			"name": "CP001_obtenerTodosLosProductos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Se obtiene codigo de respuesta  200', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test('Número correcto de productos', function () {\r",
+							"    // pm.expect(jsonData).to.be.an('array').with.lengthOf(Number(pm.collectionVariables.get('cantidadDeProductos')));\r",
+							"    var expectedLength = Number(pm.collectionVariables.get('cantidadDeProductos')); // Convertir a número\r",
+							"    pm.expect(jsonData).to.be.an('array').with.length.of.at.least(expectedLength); // Al menos deben existir X productos\r",
+							"});\r",
+							"\r",
+							"pm.test('Los titulos contienen una descripción ', function () {\r",
+							"    for (var i = 0; i < jsonData.length; i++) {\r",
+							"        var product = jsonData[i];\r",
+							"        pm.expect(product.title).not.to.be.empty;\r",
+							"    }\r",
+							"})\r",
+							"\r",
+							"pm.test('Los precios son mayores a 0 ', function () {\r",
+							"    for (var i = 0; i < jsonData.length; i++) {\r",
+							"        var product = jsonData[i];\r",
+							"        pm.expect(product.price).to.be.greaterThan(0);\r",
+							"    }\r",
+							"})\r",
+							"\r",
+							"pm.test('Todos los productos tienen una imagen establecida', function () {\r",
+							"    for (var i = 0; i < jsonData.length; i++) {\r",
+							"        var product = jsonData[i];\r",
+							"        pm.expect(product.image).not.to.be.empty;\r",
+							"    }\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/products"
+			},
+			"response": [
+				{
+					"name": "productos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "https://fakestoreapi.com/products"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 05 Jan 2024 17:06:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"297c-h+n6NsR3M51S6528jZo3BluzvtU\""
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=CuDyxSS7w4fOh%2BO8k14vydoYX1MYg%2BDTWnOOHr%2FWgFvCMWP%2FqWO8N24Y3NNDdX%2BuG%2B5gBwbneGxihQDD4kVYAP6%2BGQLB3Hv7JR%2FXqD%2BIPd4CsNot0zYVSGiCMCfQQ5NvO0Px\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "840d5093589b961a-MIA"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						},
+						{
+							"key": "alt-svc",
+							"value": "h3=\":443\"; ma=86400"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops\",\n        \"price\": 109.95,\n        \"description\": \"Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday\",\n        \"category\": \"men's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg\",\n        \"rating\": {\n            \"rate\": 3.9,\n            \"count\": 120\n        }\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Mens Casual Premium Slim Fit T-Shirts \",\n        \"price\": 22.3,\n        \"description\": \"Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.\",\n        \"category\": \"men's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg\",\n        \"rating\": {\n            \"rate\": 4.1,\n            \"count\": 259\n        }\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Mens Cotton Jacket\",\n        \"price\": 55.99,\n        \"description\": \"great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.\",\n        \"category\": \"men's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg\",\n        \"rating\": {\n            \"rate\": 4.7,\n            \"count\": 500\n        }\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Mens Casual Slim Fit\",\n        \"price\": 15.99,\n        \"description\": \"The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.\",\n        \"category\": \"men's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg\",\n        \"rating\": {\n            \"rate\": 2.1,\n            \"count\": 430\n        }\n    },\n    {\n        \"id\": 5,\n        \"title\": \"John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet\",\n        \"price\": 695,\n        \"description\": \"From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.\",\n        \"category\": \"jewelery\",\n        \"image\": \"https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg\",\n        \"rating\": {\n            \"rate\": 4.6,\n            \"count\": 400\n        }\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Solid Gold Petite Micropave \",\n        \"price\": 168,\n        \"description\": \"Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.\",\n        \"category\": \"jewelery\",\n        \"image\": \"https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg\",\n        \"rating\": {\n            \"rate\": 3.9,\n            \"count\": 70\n        }\n    },\n    {\n        \"id\": 7,\n        \"title\": \"White Gold Plated Princess\",\n        \"price\": 9.99,\n        \"description\": \"Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...\",\n        \"category\": \"jewelery\",\n        \"image\": \"https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg\",\n        \"rating\": {\n            \"rate\": 3,\n            \"count\": 400\n        }\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Pierced Owl Rose Gold Plated Stainless Steel Double\",\n        \"price\": 10.99,\n        \"description\": \"Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel\",\n        \"category\": \"jewelery\",\n        \"image\": \"https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg\",\n        \"rating\": {\n            \"rate\": 1.9,\n            \"count\": 100\n        }\n    },\n    {\n        \"id\": 9,\n        \"title\": \"WD 2TB Elements Portable External Hard Drive - USB 3.0 \",\n        \"price\": 64,\n        \"description\": \"USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system\",\n        \"category\": \"electronics\",\n        \"image\": \"https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg\",\n        \"rating\": {\n            \"rate\": 3.3,\n            \"count\": 203\n        }\n    },\n    {\n        \"id\": 10,\n        \"title\": \"SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s\",\n        \"price\": 109,\n        \"description\": \"Easy upgrade for faster boot up, shutdown, application load and response (As compared to 5400 RPM SATA 2.5” hard drive; Based on published specifications and internal benchmarking tests using PCMark vantage scores) Boosts burst write performance, making it ideal for typical PC workloads The perfect balance of performance and reliability Read/write speeds of up to 535MB/s/450MB/s (Based on internal testing; Performance may vary depending upon drive capacity, host device, OS and application.)\",\n        \"category\": \"electronics\",\n        \"image\": \"https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg\",\n        \"rating\": {\n            \"rate\": 2.9,\n            \"count\": 470\n        }\n    },\n    {\n        \"id\": 11,\n        \"title\": \"Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5\",\n        \"price\": 109,\n        \"description\": \"3D NAND flash are applied to deliver high transfer speeds Remarkable transfer speeds that enable faster bootup and improved overall system performance. The advanced SLC Cache Technology allows performance boost and longer lifespan 7mm slim design suitable for Ultrabooks and Ultra-slim notebooks. Supports TRIM command, Garbage Collection technology, RAID, and ECC (Error Checking & Correction) to provide the optimized performance and enhanced reliability.\",\n        \"category\": \"electronics\",\n        \"image\": \"https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg\",\n        \"rating\": {\n            \"rate\": 4.8,\n            \"count\": 319\n        }\n    },\n    {\n        \"id\": 12,\n        \"title\": \"WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive\",\n        \"price\": 114,\n        \"description\": \"Expand your PS4 gaming experience, Play anywhere Fast and easy, setup Sleek design with high capacity, 3-year manufacturer's limited warranty\",\n        \"category\": \"electronics\",\n        \"image\": \"https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg\",\n        \"rating\": {\n            \"rate\": 4.8,\n            \"count\": 400\n        }\n    },\n    {\n        \"id\": 13,\n        \"title\": \"Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin\",\n        \"price\": 599,\n        \"description\": \"21. 5 inches Full HD (1920 x 1080) widescreen IPS display And Radeon free Sync technology. No compatibility for VESA Mount Refresh Rate: 75Hz - Using HDMI port Zero-frame design | ultra-thin | 4ms response time | IPS panel Aspect ratio - 16: 9. Color Supported - 16. 7 million colors. Brightness - 250 nit Tilt angle -5 degree to 15 degree. Horizontal viewing angle-178 degree. Vertical viewing angle-178 degree 75 hertz\",\n        \"category\": \"electronics\",\n        \"image\": \"https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg\",\n        \"rating\": {\n            \"rate\": 2.9,\n            \"count\": 250\n        }\n    },\n    {\n        \"id\": 14,\n        \"title\": \"Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED \",\n        \"price\": 999.99,\n        \"description\": \"49 INCH SUPER ULTRAWIDE 32:9 CURVED GAMING MONITOR with dual 27 inch screen side by side QUANTUM DOT (QLED) TECHNOLOGY, HDR support and factory calibration provides stunningly realistic and accurate color and contrast 144HZ HIGH REFRESH RATE and 1ms ultra fast response time work to eliminate motion blur, ghosting, and reduce input lag\",\n        \"category\": \"electronics\",\n        \"image\": \"https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg\",\n        \"rating\": {\n            \"rate\": 2.2,\n            \"count\": 140\n        }\n    },\n    {\n        \"id\": 15,\n        \"title\": \"BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats\",\n        \"price\": 56.99,\n        \"description\": \"Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates\",\n        \"category\": \"women's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg\",\n        \"rating\": {\n            \"rate\": 2.6,\n            \"count\": 235\n        }\n    },\n    {\n        \"id\": 16,\n        \"title\": \"Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket\",\n        \"price\": 29.95,\n        \"description\": \"100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON\",\n        \"category\": \"women's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg\",\n        \"rating\": {\n            \"rate\": 2.9,\n            \"count\": 340\n        }\n    },\n    {\n        \"id\": 17,\n        \"title\": \"Rain Jacket Women Windbreaker Striped Climbing Raincoats\",\n        \"price\": 39.99,\n        \"description\": \"Lightweight perfet for trip or casual wear---Long sleeve with hooded, adjustable drawstring waist design. Button and zipper front closure raincoat, fully stripes Lined and The Raincoat has 2 side pockets are a good size to hold all kinds of things, it covers the hips, and the hood is generous but doesn't overdo it.Attached Cotton Lined Hood with Adjustable Drawstrings give it a real styled look.\",\n        \"category\": \"women's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg\",\n        \"rating\": {\n            \"rate\": 3.8,\n            \"count\": 679\n        }\n    },\n    {\n        \"id\": 18,\n        \"title\": \"MBJ Women's Solid Short Sleeve Boat Neck V \",\n        \"price\": 9.85,\n        \"description\": \"95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem\",\n        \"category\": \"women's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg\",\n        \"rating\": {\n            \"rate\": 4.7,\n            \"count\": 130\n        }\n    },\n    {\n        \"id\": 19,\n        \"title\": \"Opna Women's Short Sleeve Moisture\",\n        \"price\": 7.95,\n        \"description\": \"100% Polyester, Machine wash, 100% cationic polyester interlock, Machine Wash & Pre Shrunk for a Great Fit, Lightweight, roomy and highly breathable with moisture wicking fabric which helps to keep moisture away, Soft Lightweight Fabric with comfortable V-neck collar and a slimmer fit, delivers a sleek, more feminine silhouette and Added Comfort\",\n        \"category\": \"women's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg\",\n        \"rating\": {\n            \"rate\": 4.5,\n            \"count\": 146\n        }\n    },\n    {\n        \"id\": 20,\n        \"title\": \"DANVOUY Womens T Shirt Casual Cotton Short\",\n        \"price\": 12.99,\n        \"description\": \"95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.\",\n        \"category\": \"women's clothing\",\n        \"image\": \"https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg\",\n        \"rating\": {\n            \"rate\": 3.6,\n            \"count\": 145\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "CP002_ObtenerDetallesDeUnProducto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"El id esperado coincide con el obtenido\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(parseInt(pm.collectionVariables.get(\"IdProducto\")));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/products/{{IdProducto}}"
+			},
+			"response": []
+		},
+		{
+			"name": "CP003_ObtenerTodasLasCategorias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"La cantidad de categorias es la correcta\", function () {\r",
+							"\r",
+							"    var expectedLength = Number(pm.collectionVariables.get(\"cantidadDeCategorias\"));\r",
+							"    pm.expect(jsonData.length).to.equal(expectedLength, `Se esperaban ${expectedLength} categorías, pero se encontraron ${jsonData.length}`);\r",
+							"});\r",
+							"pm.test(\"Contiene la categoria electrónica\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"electronics\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contiene la categoria joyería\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"jewelery\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contiene la categoria ropa de hombre\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"men's clothing\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Contiene la categoria ropa de mujer\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"women's clothing\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/products/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "CP004_ObtenerProductosPorCategoria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    var jsonData = pm.response.json();\r",
+							"    \r",
+							"    pm.test(\"Todos los productos pertenecen a la categoria buscada\", function () {\r",
+							"    for(var i = 0 ; i < jsonData.length ; i++)\r",
+							"    {\r",
+							"        var item = jsonData[i];\r",
+							"        pm.expect(item.category).to.eql(pm.collectionVariables.get(\"categoria\"));\r",
+							"\r",
+							"    } \r",
+							"        // console.log(pm.collectionVariables.get(\"categoria\"));\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/products/category/{{categoria}}"
+			},
+			"response": []
+		},
+		{
+			"name": "CP005_ObtenerTodosLosUsuarios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test('La cantidad de usuarios es la esperada', function () {\r",
+							"        var expectedLength = Number(pm.collectionVariables.get('cantidadDeUsuarios')); // Convertir a número\r",
+							"        pm.expect(jsonData).to.be.an('array').with.length.of.at.least(expectedLength); // Al menos deben existir 5 usuarios\r",
+							"        // console.log(pm.collectionVariables.get('cantidadDeUsuarios'));\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Los usuarios tienen un nombre valido  \", function () {\r",
+							"    for( var i = 0; i < jsonData.length; i++)\r",
+							"    {\r",
+							"        var user = jsonData[i];\r",
+							"        pm.expect(user.name.firstname.length).to.be.at.least(3);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Los usuarios tienen un email valido  \", function () {\r",
+							"    for( var i = 0; i < jsonData.length; i++)\r",
+							"    {\r",
+							"        var user = jsonData[i];\r",
+							"        pm.expect(user.email).to.have.lengthOf.at.least(13);\r",
+							"        pm.expect(user.email).to.include(\"@\");\r",
+							"        \r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/users"
+			},
+			"response": []
+		},
+		{
+			"name": "CP006_ObtenerInformaciónDeUnUsuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El id del usuario esperado coincide con el obtenido\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(parseInt(pm.collectionVariables.get(\"idUsuario\")));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/users/{{idUsuario}}"
+			},
+			"response": []
+		},
+		{
+			"name": "CP007_ObtenerTodasLasOrdenes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test('La cantidad de ordenes es mayor a {{cantidadDeOrdenes}} ', function () {\r",
+							"    pm.expect(jsonData).to.be.an('array').that.has.length.above(Number(pm.collectionVariables.get('cantidadDeOrdenes')));\r",
+							"})\r",
+							"\r",
+							"console.log(pm.collectionVariables.get('cantidadDeOrdenes'))\r",
+							"\r",
+							"pm.test(\"Cada orden debe tener al menos 1 producto\", function () {\r",
+							"    for(var i = 0; i < jsonData.length; i++) {\r",
+							"        var order = jsonData[i];   \r",
+							"        pm.expect(order.products.length).to.be.at.least(1, \"La orden debe tener al menos 1 producto\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Cada producto de la orden tiene al menos 1 unidad\", function () {\r",
+							"    for(var i = 0; i < jsonData.length; i++) {\r",
+							"        var order = jsonData[i];\r",
+							"        for(var j = 0; j < order.products.length; j++) {\r",
+							"            var product = order.products[j];    \r",
+							"            pm.expect(product.quantity).to.be.at.least(1, \"El producto debe tener al menos 1 unidad\");\r",
+							"        }\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "CP008_AgregarOrden",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El id obtenido es igual al esperado\", function () {\r",
+							"    pm.expect(jsonData.id).to.eql(parseInt(pm.collectionVariables.get(\"idOrden\")));\r",
+							"\r",
+							"});\r",
+							"\r",
+							"// console.log(pm.collectionVariables.get(\"idOrden\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "                {\r\n                    \"userId\": {{idOrden}},\r\n                    \"date\":\"2020-02-03\",\r\n                    \"products\":[{\"productId\":5,\"quantity\":1},{\"productId\":1,\"quantity\":5}]\r\n                }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/carts"
+			},
+			"response": []
+		},
+		{
+			"name": "CP009_agregarProducto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Se obtiene un codigo 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar el titulo del producto agregado\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.title).to.eql(\"test product\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n                    \"title\": \"test product\",\r\n                    \"price\": 13.5,\r\n                    \"description\": \"lorem ipsum set\",\r\n                    \"image\": \"https://i.pravatar.cc\",\r\n                    \"category\": \"electronic\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/products"
+			},
+			"response": []
+		},
+		{
+			"name": "CP010_agregarUsuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n                    \"email\":\"John@gmail.com\",\r\n                    \"username\":\"johnd\",\r\n                    \"password\":\"m38rmF$\",\r\n                    \"name\":{\r\n                        \"firstname\":\"Johns\",\r\n                        \"lastname\":\"Deforme\"\r\n                    },\r\n                    \"address\":{\r\n                        \"city\":\"kilcoole\",\r\n                        \"street\":\"7835 new road\",\r\n                        \"number\":3,\r\n                        \"zipcode\":\"12926-3874\",\r\n                        \"geolocation\":{\r\n                            \"lat\":\"-37.3159\",\r\n                            \"long\":\"81.1496\"\r\n                        }\r\n                    },\r\n                    \"phone\":\"1-570-236-7033\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/users"
+			},
+			"response": []
+		},
+		{
+			"name": "CP011_actualizarProductoPorId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Se obtiene un codigo 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar el titulo del producto agregado\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.title).to.eql(\"test product\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El id esperado coincide con el obtenido\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(parseInt(pm.collectionVariables.get(\"IdProducto\")));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "                {\r\n                    \"title\": \"test product\",\r\n                    \"price\": 13.5,\r\n                    \"description\": \"lorem ipsum set\",\r\n                    \"image\": \"https://i.pravatar.cc\",\r\n                    \"category\": \"electronic\"\r\n                }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/products/{{IdProducto}}"
+			},
+			"response": []
+		},
+		{
+			"name": "CP012_borrarProductoPorId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Se borró el producto con el id establecido\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(parseInt(pm.collectionVariables.get(\"IdProducto\"))); //parsear a entero\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/products/{{IdProducto}}"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "IdProducto",
+			"value": "6"
+		},
+		{
+			"key": "cantidadDeProductos",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cantidadDeCategorias",
+			"value": "4",
+			"type": "string"
+		},
+		{
+			"key": "categoria",
+			"value": "electronics",
+			"type": "string"
+		},
+		{
+			"key": "cantidadDeUsuarios",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "idUsuario",
+			"value": "10"
+		},
+		{
+			"key": "cantidadDeOrdenes",
+			"value": ""
+		},
+		{
+			"key": "idOrden",
+			"value": "11",
+			"type": "string"
+		},
+		{
+			"key": "url",
+			"value": "https://fakestoreapi.com"
+		}
+	]
+}
